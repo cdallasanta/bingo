@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 import GamesList from './components/gamesList';
 import Game from './components/game';
 import { Route, Switch } from 'react-router-dom'

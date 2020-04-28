@@ -14,5 +14,6 @@ class Card < ApplicationRecord
       self.board << column
     end
     self.board[2][2] = "Free Space"
+    self.checked[2][2] = true
   end
 end

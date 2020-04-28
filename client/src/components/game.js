@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { API_ROOT, HEADERS } from '../constants'
 import { ActionCable } from 'react-actioncable-provider';
+import SmallCard from './smallCard';
 
 export class Game extends Component {
   state = {
@@ -41,7 +42,7 @@ export class Game extends Component {
 
   showCards = () => {
     return this.state.cards.map((card, i) => {
-      return <li key={i}>{card.user}</li>
+      return <SmallCard checked={card.checked} user={card.user} key={i} />
     })
   }
   
@@ -78,9 +79,9 @@ export class Game extends Component {
         <h2>Cards</h2>
         <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
         <button onClick={this.createCard}>New Card</button>
-        <ul>
+        <div id="cards">
           {this.showCards()}
-        </ul>
+        </div>
 
         <h2>Numbers</h2>
         <button onClick={this.drawNumber}>Draw Number</button>

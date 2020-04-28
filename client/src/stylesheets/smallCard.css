@@ -1,0 +1,27 @@
+.small-grid {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.checked {
+  background-color: red;
+}
+
+.cell {
+  outline: 1px solid black;
+  width: 10px;
+  height: 10px;
+}
+
+#cards {
+  display: flex;
+}
+
+.card-div {
+  margin: 5px;
+}

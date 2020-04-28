@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_192808) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "board", default: [], array: true
-    t.integer "checked", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
+    t.integer "checked", default: [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]], array: true
     t.integer "game_id"
     t.string "user"
     t.boolean "ready", default: false
