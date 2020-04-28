@@ -6,6 +6,7 @@ export class Game extends Component {
   state = {
     game_id: this.props.match.params.game_id,
     drawn_numbers: [],
+    most_recent_num: null,
     cards: [],
     newUser: ""
   }
@@ -53,9 +54,18 @@ export class Game extends Component {
   drawNumber = () => {
     let num;
     do {
-      num = Math.random()*15 + 1;
+      num = Math.floor(Math.random()*75 + 1);
     } while (this.state.drawn_numbers.includes(num));
-    this.setState({drawn_numbers: [...this.drawn_numbers, num].sort()});
+    fetch(`${API_ROOT}/games/${this.state.game_id}`, {
+      method: 'PATCH',
+      headers: HEADERS,
+      body: JSON.stringify({game: {game_id: this.state.game_id, drawn_numbers: [...this.state.drawn_numbers, num].sort()}})
+      }
+    )
+    this.setState({
+      drawn_numbers: [...this.state.drawn_numbers, num].sort(),
+      most_recent_num: num
+    });
   }
 
   render(){
@@ -73,8 +83,9 @@ export class Game extends Component {
         </ul>
 
         <h2>Numbers</h2>
-        <button onClick={this.drawNumber}>New Card</button>
+        <button onClick={this.drawNumber}>Draw Number</button>
         <div id="numbers">
+          <b>{this.state.most_recent_num}</b>
           {this.showNumbers()}
         </div>
       </div>

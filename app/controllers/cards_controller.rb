@@ -3,6 +3,7 @@ class CardsController < ApplicationController
 
   def create
     card = Card.new(card_params)
+    card.create_board
     game = Game.find(card_params[:game_id])
     if card.save
       serialized_data = ActiveModelSerializers::Adapter::Json.new(
