@@ -1,7 +1,5 @@
 import React from 'react'
-import { ActionCable } from 'react-actioncable-provider';
 import { API_ROOT, HEADERS } from '../constants';
-// import Cable from './Cable';
 
 class GamesList extends React.Component {
   state = {
@@ -39,16 +37,6 @@ class GamesList extends React.Component {
   render(){
     return (
     <div className="gamesList">
-      <ActionCable
-        channel={{channel: "GamesChannel" }}
-        onReceived={this.handleReceivedGame}
-      />
-      {/* {this.state.games.length ? (
-        <Cable
-          games={this.state.games}
-        />
-      ) : null
-      } */}
       <button onClick={this.createGame}>New Game</button>
       <h2>Games</h2>
       <ul>

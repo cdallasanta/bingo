@@ -1,17 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ActionCableProvider } from 'react-actioncable-provider';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { API_WS_ROOT } from './constants';
 import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
-  <ActionCableProvider url={API_WS_ROOT}>
+  <React.StrictMode>
     <Router>
       <App />
     </Router>
-  </ActionCableProvider>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

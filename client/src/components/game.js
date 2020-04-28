@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { API_ROOT, HEADERS } from '../constants'
-import { ActionCable } from 'react-actioncable-provider';
 import SmallCard from './smallCard';
 
-export class Game extends Component {
+class Game extends Component {
+  constructor(props){
+    super(props);
+    this.timer = setInterval(() => this.fetchGame(), 1000);
+  }
+  
   state = {
     game_id: this.props.match.params.game_id,
     drawn_numbers: [],
@@ -13,6 +17,15 @@ export class Game extends Component {
   }
 
   componentDidMount = () => {
+    this.fetchGame()
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.timer)
+  }
+
+  fetchGame = () => {
+    console.log("fetching");
     fetch(`${API_ROOT}/games/${this.state.game_id}`)
       .then(resp => resp.json())
       .then(data => {
@@ -23,21 +36,14 @@ export class Game extends Component {
       })
   }
 
-  handleReceivedCard = response => {
-    const {card} = response;
-    if (!this.state.cards.some(c => c.id === card.id)) {
-      this.setState({
-        cards: [...this.state.cards, card]
-      })
-    }
-  }
-
   createCard = () => {
     fetch(`${API_ROOT}/cards`, {
       method: 'POST',
       headers: HEADERS,
       body: JSON.stringify({card: {game_id: this.state.game_id, user: this.state.newUser}})
-    }).then(() => this.setState({newUser: ""}))
+    }).then(() => {
+      debugger;
+    })
   }
 
   showCards = () => {
@@ -72,10 +78,6 @@ export class Game extends Component {
   render(){
     return (
       <div className="game">
-        <ActionCable
-          channel={{channel: "CardsChannel" , game: this.state.game_id}}
-          onReceived={this.handleReceivedCard}
-        />
         <h2>Cards</h2>
         <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
         <button onClick={this.createCard}>New Card</button>
