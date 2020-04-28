@@ -16,22 +16,22 @@ class GamesList extends React.Component {
 
   handleReceivedGame = response => {
     const {game} = response;
-    this.setState({
-      games: [...this.state.games, game]
-    })
+    if (!this.state.games.some(g => g.id === game.id)) {
+      this.setState({
+        games: [...this.state.games, game]
+      })
+    }
   }
 
   createGame = () => {
-    fetch(`${API_ROOT}/games/new`, {
+    fetch(`${API_ROOT}/games`, {
       method: 'POST',
       headers: HEADERS
     })
-      .then(resp => resp.json())
-      .then(resp => console.log(resp))
   }
 
   showGames = () =>{
-    this.state.games.map((game, i) => {
+    return this.state.games.map((game, i) => {
       return <li key={i}>{game.id}</li>
     })
   }
@@ -52,7 +52,7 @@ class GamesList extends React.Component {
       <button onClick={this.createGame}>New Game</button>
       <h2>Games</h2>
       <ul>
-        {this.showGames}
+        {this.showGames()}
       </ul>
     </div>
     )

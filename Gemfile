@@ -24,6 +24,7 @@ gem 'redis', '~> 4.0'
 
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors'
+gem 'pry'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,4 +1,6 @@
 class CardsController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def create
     card = Card.new(card_params)
     game = Game.find(card_params[:game_id])

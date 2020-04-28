@@ -5,10 +5,13 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { API_WS_ROOT } from './constants';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
   <ActionCableProvider url={API_WS_ROOT}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </ActionCableProvider>,
   document.getElementById('root')
 );

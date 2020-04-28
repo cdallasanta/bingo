@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_192808) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "board", default: [], array: true
-    t.integer "checked", default: [], array: true
+    t.integer "checked", default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], array: true
     t.integer "game_id"
     t.string "user"
     t.boolean "ready", default: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_192808) do
 
   create_table "games", force: :cascade do |t|
     t.integer "drawn_numbers", default: [], array: true
+    t.boolean "started", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
