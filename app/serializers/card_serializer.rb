@@ -1,3 +1,3 @@
 class CardSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :board, :checked, :user, :ready, :game_id
 end

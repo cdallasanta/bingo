@@ -1,3 +1,4 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :drawn_numbers
+  has_many :cards
 end
