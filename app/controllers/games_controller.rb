@@ -1,19 +1,14 @@
 class GamesController < ApplicationController
-  protect_from_forgery with: :null_session
 
   def index
-    games = Game.all
+    games = Game.all.sort_by{|g| g.created_at}.reverse
     render json: games
   end
 
   def create
     game = Game.new
     if game.save
-      serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        GameSerializer.new(game)
-      ).serializable_hash
-      ActionCable.server.broadcast 'games_channel', serialized_data
-      head :ok
+      render json: game
     end
   end
 
@@ -24,11 +19,7 @@ class GamesController < ApplicationController
   def update
     game = Game.find(game_params[:game_id])
     if game.update(drawn_numbers: game_params[:drawn_numbers].sort())
-      serialized_data = ActiveModelSerializers::Adapter::Json.new(
-        GameSerializer.new(game)
-      ).serializable_hash
-      ActionCable.server.broadcast 'games_channel', serialized_data
-      head :ok
+      render json: game
     end
   end
 

@@ -5,7 +5,6 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.integer :checked, array: true, default: Array.new(5).fill(Array.new(5).fill(false))
       t.integer :game_id
       t.string :user
-      t.boolean :ready, default: false
       t.timestamps
     end
   end

@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import { API_ROOT, HEADERS } from '../constants'
+import React, { Component } from 'react';
+import { API_ROOT, HEADERS } from '../constants';
 import SmallCard from './smallCard';
+import { Link } from 'react-router-dom';
 
 class Game extends Component {
   constructor(props){
     super(props);
-    this.timer = setInterval(() => this.fetchGame(), 1000);
+    this.timer = setInterval(() => this.fetchGame(), 3000);
   }
   
   state = {
@@ -25,7 +26,6 @@ class Game extends Component {
   }
 
   fetchGame = () => {
-    console.log("fetching");
     fetch(`${API_ROOT}/games/${this.state.game_id}`)
       .then(resp => resp.json())
       .then(data => {
@@ -41,14 +41,13 @@ class Game extends Component {
       method: 'POST',
       headers: HEADERS,
       body: JSON.stringify({card: {game_id: this.state.game_id, user: this.state.newUser}})
-    }).then(() => {
-      debugger;
-    })
+    }).then(resp => resp.json())
+      .then(data=> this.setState({cards: [...this.state.cards, data]}))
   }
 
   showCards = () => {
     return this.state.cards.map((card, i) => {
-      return <SmallCard checked={card.checked} user={card.user} key={i} />
+      return <Link key={i} to={`/cards/${card.id}`}><SmallCard checked={card.checked} user={card.user} key={i} /></Link>
     })
   }
   
@@ -66,13 +65,14 @@ class Game extends Component {
     fetch(`${API_ROOT}/games/${this.state.game_id}`, {
       method: 'PATCH',
       headers: HEADERS,
-      body: JSON.stringify({game: {game_id: this.state.game_id, drawn_numbers: [...this.state.drawn_numbers, num].sort()}})
+      body: JSON.stringify({game: {
+        game_id: this.state.game_id,
+        drawn_numbers: [...this.state.drawn_numbers, num].sort()}})
       }
-    )
-    this.setState({
-      drawn_numbers: [...this.state.drawn_numbers, num].sort(),
-      most_recent_num: num
-    });
+    ).then(resp => resp.json())
+      .then(game => {
+        this.setState({drawn_numbers: game.drawn_numbers, most_recent_num: num})
+      })
   }
 
   render(){

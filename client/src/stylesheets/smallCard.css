@@ -8,11 +8,11 @@
   flex-direction: column;
 }
 
-.checked {
+.small-grid .checked {
   background-color: red;
 }
 
-.cell {
+.small-cell {
   outline: 1px solid black;
   width: 10px;
   height: 10px;

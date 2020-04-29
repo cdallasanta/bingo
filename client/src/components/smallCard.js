@@ -7,7 +7,7 @@ export class SmallCard extends Component {
       {this.props.checked.map((col, i) => {
         return <div key={i} className="column"> {
           col.map((cell, i) => {
-            return <div key={i} className={`cell${cell === 1 ? " checked" : ""}`} />
+            return <div key={i} className={`small-cell${cell === 1 ? " checked" : ""}`} />
           })
         }</div>
       })}

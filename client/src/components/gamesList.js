@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { API_ROOT, HEADERS } from '../constants';
 
 class GamesList extends React.Component {
@@ -30,7 +31,7 @@ class GamesList extends React.Component {
 
   showGames = () =>{
     return this.state.games.map((game, i) => {
-      return <li key={i}>{game.id}</li>
+      return <li key={i}><Link key={i} to={`/games/${game.id}`}>{game.id}</Link></li>
     })
   }
 

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import GamesList from './components/gamesList';
 import Game from './components/game';
+import Card from './components/card';
 import { Route, Switch } from 'react-router-dom'
 
 
@@ -9,9 +10,9 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          {/* <Route path="/cards/:card_id"
-            component={PreuseInspectionContainer}
-          /> */}
+          <Route path="/cards/:card_id"
+            component={Card}
+          />
           <Route path="/games/:game_id"
             component={Game}
           />
