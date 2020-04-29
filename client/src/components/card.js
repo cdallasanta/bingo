@@ -83,14 +83,13 @@ export class Card extends Component {
   render(){
     return (
       <div className="game">
-        <h2>Cards</h2>
         <div id="cards">
           {this.state.game.cards ? this.showCards() : null}
         </div>
 
         {this.showGrid()}
 
-        <h2>Numbers</h2>
+        <h2>Numbers Drawn</h2>
         <div id="numbers">
           <b>{this.state.most_recent_num}</b>
           {this.state.game.drawn_numbers ? this.showNumbers() : null}
