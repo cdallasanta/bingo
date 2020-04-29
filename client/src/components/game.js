@@ -97,7 +97,7 @@ class Game extends Component {
 
         <div style={{margin: "5px"}}>
           Invite more players using this link: <br />
-          <a href={`${API_ROOT}${this.props.location.pathname}`}>{`${API_ROOT}${this.props.location.pathname}`}</a>
+          <a href={`https://bingo-bango-bongo.herokuapp.com${this.props.location.pathname}`}>{`${API_ROOT}${this.props.location.pathname}`}</a>
         </div>
 
         <h2>Numbers Drawn:</h2>
