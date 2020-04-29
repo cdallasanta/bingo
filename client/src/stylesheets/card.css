@@ -1,11 +1,42 @@
 .large-grid {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  height: 70vh;
+  width: 70vh;
+}
+
+#card-header {
+  outline: 4px solid black;
+  display: flex;
+  flex-direction: row;
+  height: 16%;
+  width: 100%
+}
+
+.header-cell {
+  width: 20%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 500%;
+}
+
+#card-numbers {
+  height: 84%;
+  width: 100%;
+  display: flex;
   flex-direction: row;
 }
 
 .column {
   display: flex;
   flex-direction: column;
+  width: 20%;
+  height: 100%;
 }
 
 .checked {
@@ -13,14 +44,11 @@
 }
 
 .unchecked {
-  background-color: white;
   color: rgba(0, 0, 0, 1);
 }
 
 .large-cell {
   outline: 1px solid black;
-  width: 100px;
-  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +57,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   font-size: 200%;
+  height: 20%;
 }
 
 #cards {
@@ -39,10 +68,15 @@
   margin: 5px;
 }
 
+#new-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 input {
-  width: 90%;
-  height: 80%;
-  text-align: center;
+  width: 200px;
+  margin-right: 10px;
   font-size: 100%;
   background: #ddd
 }

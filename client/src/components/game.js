@@ -52,8 +52,9 @@ class Game extends Component {
   }
   
   showNumbers = () => {
-    return this.state.drawn_numbers.map((num, i) => {
-      return <div key={i}>{num}</div>
+    return this.state.drawn_numbers.reverse().map((num, i) => {
+      let char = "BINGO"[Math.floor(num / 15)]
+      return <div key={i}>{char} {num}</div>
     })
   }
 
@@ -67,7 +68,7 @@ class Game extends Component {
       headers: HEADERS,
       body: JSON.stringify({game: {
         game_id: this.state.game_id,
-        drawn_numbers: [...this.state.drawn_numbers, num].sort()}})
+        drawn_numbers: [...this.state.drawn_numbers, num]}})
       }
     ).then(resp => resp.json())
       .then(game => {
@@ -76,19 +77,37 @@ class Game extends Component {
   }
 
   render(){
+    let char;
+    if (this.state.drawn_numbers) {
+      char = "BINGO"[Math.floor(this.state.drawn_numbers[this.state.drawn_numbers.length-1] / 15)]
+    }
+    
     return (
       <div className="game">
         <h2>Cards</h2>
-        <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
-        <button onClick={this.createCard}>New Card</button>
-        <div id="cards">
+        <div id="new-card">
+          <form onSubmit={this.createCard}>
+            <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
+            <button type="submit">New Card</button>
+          </form>
+        </div>
+        <div id="small-cards">
           {this.showCards()}
         </div>
 
-        <h2>Numbers</h2>
+        <div style={{margin: "5px"}}>
+          Invite more players using this link: <br />
+          <a href={`${API_ROOT}${this.props.location.pathname}`}>{`${API_ROOT}${this.props.location.pathname}`}</a>
+        </div>
+
+        <h2>Numbers Drawn:</h2>
         <button onClick={this.drawNumber}>Draw Number</button>
         <div id="numbers">
-          <b>{this.state.most_recent_num}</b>
+          <div id="most-recent-num">
+            {this.state.drawn_numbers ? 
+              <b>Most Recent: {char} {this.state.drawn_numbers[this.state.drawn_numbers.length-1]}</b>
+            : null }
+          </div>
           {this.showNumbers()}
         </div>
       </div>

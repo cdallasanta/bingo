@@ -18,7 +18,7 @@ class GamesController < ApplicationController
 
   def update
     game = Game.find(game_params[:game_id])
-    if game.update(drawn_numbers: game_params[:drawn_numbers].sort())
+    if game.update(drawn_numbers: game_params[:drawn_numbers])
       render json: game
     end
   end

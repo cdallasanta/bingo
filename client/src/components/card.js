@@ -28,19 +28,30 @@ export class Card extends Component {
 
   showGrid = () => {
     return <div className="large-grid">
-      {this.state.board.map((col, i) => {
-        return <div key={i} className="column"> {
-          col.map((cell, j) => {
-            return <div key={j}
-              className={`large-cell${this.state.checked[i][j] ? " checked" : ""}`}
-              data-col={i}
-              data-row={j}
-              onClick={e => this.clickCell(e.target)}
-              style={{backgroundImage: `${this.state.checked[i][j] ? "url("+ stamps[j] + ")" : "none"}`}}>{cell}
-            </div>
-          })
-        }</div>
-      })}
+      <div id="card-header">
+        <div id="b-header" className="header-cell">B</div>
+        <div id="i-header" className="header-cell">I</div>
+        <div id="n-header" className="header-cell">N</div>
+        <div id="g-header" className="header-cell">G</div>
+        <div id="o-header" className="header-cell">O</div>
+      </div>
+      
+      <div id="card-numbers">
+        {this.state.board.map((col, i) => {
+          return <div key={i} className="column"> 
+            {
+            col.map((cell, j) => {
+              return <div key={j}
+                className={`large-cell${this.state.checked[i][j] ? " checked" : ""}`}
+                data-col={i}
+                data-row={j}
+                onClick={e => this.clickCell(e.target)}
+                style={{backgroundImage: `${this.state.checked[i][j] ? "url("+ stamps[j] + ")" : "none"}`}}>{cell}
+              </div>
+            })
+          }</div>
+        })}
+      </div>
     </div>
   }
 
@@ -75,23 +86,33 @@ export class Card extends Component {
   }
   
   showNumbers = () => {
-    return this.state.game.drawn_numbers.map((num, i) => {
-      return <div key={i}>{num}</div>
+    return this.state.game.drawn_numbers.reverse().map((num, i) => {
+      let char = "BINGO"[Math.floor(num / 15)]
+      return <div key={i}>{char} {num}</div>
     })
   }
 
   render(){
+    let char;
+    if (this.state.game.drawn_numbers) {
+      char = "BINGO"[Math.floor(this.state.game.drawn_numbers[this.state.game.drawn_numbers.length-1] / 15)]
+    }
+
     return (
       <div className="game">
-        <div id="cards">
+        <div id="small-cards">
           {this.state.game.cards ? this.showCards() : null}
         </div>
 
         {this.showGrid()}
 
-        <h2>Numbers Drawn</h2>
+        <h2>Numbers Drawn:</h2>
         <div id="numbers">
-          <b>{this.state.most_recent_num}</b>
+          <div id="most-recent-num">
+            {this.state.game.drawn_numbers ? 
+              <b>Most Recent: {char} {this.state.game.drawn_numbers[this.state.game.drawn_numbers.length-1]}</b>
+            : null }
+          </div>
           {this.state.game.drawn_numbers ? this.showNumbers() : null}
         </div>
       </div>
