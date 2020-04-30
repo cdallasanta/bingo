@@ -5,7 +5,12 @@ class Api::CardsController < ApplicationController
     card.create_board
     game = Game.find(card_params[:game_id])
     if card.save
-      render json: card
+      GamesChannel.broadcast_to(game, {
+        id: game.id,
+        cards: game.cards.sort_by{|c| c.id},
+        drawn_numbers: game.drawn_numbers,
+        created_at: game.created_at
+      })
     end
   end
 
@@ -15,8 +20,14 @@ class Api::CardsController < ApplicationController
 
   def update
     card = Card.find(card_params[:id])
+    game = card.game
     if card.update(card_params)
-      render json: card
+      GamesChannel.broadcast_to(game, {
+        id: game.id,
+        cards: game.cards.sort_by{|c| c.id},
+        drawn_numbers: game.drawn_numbers,
+        created_at: game.created_at
+      })
     end
   end
 

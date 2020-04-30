@@ -1,11 +1,14 @@
 .small-grid {
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
-.column {
+.small-column {
   display: flex;
   flex-direction: column;
+  width: 10px;
 }
 
 .small-grid .checked {

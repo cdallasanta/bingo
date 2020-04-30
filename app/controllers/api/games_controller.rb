@@ -1,5 +1,4 @@
 class Api::GamesController < ApplicationController
-
   def index
     games = Game.all.sort_by{|g| g.created_at}.reverse
     render json: games
@@ -19,7 +18,12 @@ class Api::GamesController < ApplicationController
   def update
     game = Game.find(game_params[:game_id])
     if game.update(drawn_numbers: game_params[:drawn_numbers])
-      render json: game
+      GamesChannel.broadcast_to(game, {
+        id: game.id,
+        cards: game.cards.sort_by{|c| c.id},
+        drawn_numbers: game.drawn_numbers,
+        created_at: game.created_at
+      })
     end
   end
 

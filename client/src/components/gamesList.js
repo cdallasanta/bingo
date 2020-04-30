@@ -27,7 +27,7 @@ class GamesList extends React.Component {
       method: 'POST',
       headers: HEADERS
     }).then(resp => resp.json())
-      .then(game => this.setState({games: [...this.state.games, game]}))
+      .then(game => this.props.history.push(`/games/${game.id}`))
   }
 
   showGames = () =>{
