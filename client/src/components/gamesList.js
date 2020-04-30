@@ -26,12 +26,13 @@ class GamesList extends React.Component {
     fetch(`${API_ROOT}/games`, {
       method: 'POST',
       headers: HEADERS
-    })
+    }).then(resp => resp.json())
+      .then(game => this.setState({games: [...this.state.games, game]}))
   }
 
   showGames = () =>{
     return this.state.games.map((game, i) => {
-      return <li key={i}><Link key={i} to={`/games/${game.id}`}>{game.id}</Link></li>
+      return <li key={i}><Link key={i} to={`/games/${game.id}`}>{game.created_at}</Link></li>
     })
   }
 
