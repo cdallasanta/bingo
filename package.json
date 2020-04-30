@@ -2,6 +2,9 @@
   "name": "bingo",
   "private": true,
   "version": "0.1.0",
+  "dependencies": {
+    "react-scripts": "3.4.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1",
