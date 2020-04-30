@@ -7,21 +7,6 @@
   width: 70vh;
 }
 
-@media only screen and (max-width: 500px) {
-  .large-grid {
-    height: 70vw;
-    width: 70vw;
-  }
-
-  .header-cell {
-    font-size: 10px;
-  }
-  
-  .large-cell {
-    background-size: 50%;
-  }
-}
-
 #card-header {
   outline: 4px solid black;
   display: flex;
@@ -106,4 +91,21 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+
+@media only screen and (max-width: 500px) {
+  .large-grid {
+    height: 70vw;
+    width: 70vw;
+  }
+
+  .header-cell {
+    font-size: 250%;
+  }
+
+  .large-cell {
+    background-size: 60%;
+  }
 }
