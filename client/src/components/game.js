@@ -21,7 +21,10 @@ class Game extends Component {
   fetchGame = () => {
     fetch(`${API_ROOT}/games/${this.state.game_id}`)
       .then(resp => resp.json())
-      .then(data => this.updateState(data))
+      .then(data => {
+        console.log(data);
+        this.updateState(data);
+      })
   }
 
   updateState = data => {
