@@ -19,7 +19,7 @@ export class Card extends Component {
   }
 
   componentDidMount = () => {
-    this.fetchGame()
+    this.fetchGame();
   }
 
   componentWillUnmount = () => {
