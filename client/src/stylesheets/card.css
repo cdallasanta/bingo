@@ -14,7 +14,11 @@
   }
 
   .header-cell {
-    font-size: large;
+    font-size: 10px;
+  }
+  
+  .large-cell {
+    background-size: 50%;
   }
 }
 
