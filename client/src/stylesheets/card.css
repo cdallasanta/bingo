@@ -12,6 +12,10 @@
     height: 70vw;
     width: 70vw;
   }
+
+  .header-cell {
+    font-size: 200%;
+  }
 }
 
 #card-header {
