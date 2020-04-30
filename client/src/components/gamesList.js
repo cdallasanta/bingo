@@ -32,7 +32,8 @@ class GamesList extends React.Component {
 
   showGames = () =>{
     return this.state.games.map((game, i) => {
-      return <li key={i}><Link key={i} to={`/games/${game.id}`}>{game.created_at}</Link></li>
+      const date = new Date(game.created_at).toDateString()
+      return <li key={i}><Link key={i} to={`/games/${game.id}`}>{date}</Link></li>
     })
   }
 
