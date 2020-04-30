@@ -9,8 +9,7 @@ export class GameWebSocket extends Component {
     },
     {
       received: (updatedGame) => {
-        console.log(data);
-        this.props.updateState(updatedGame);
+        this.props.updateState(updatedGame)
       }
     })
   }
