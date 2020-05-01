@@ -56,10 +56,8 @@ class Game extends Component {
   }
 
   drawNumber = () => {
-    let num;
-    do {
-      num = Math.floor(Math.random()*75 + 1);
-    } while (this.state.drawn_numbers.includes(num));
+    const NUMS = [...Array(75).keys()].filter(n => !this.state.drawn_numbers.includes(n))
+    let num = NUMS[Math.floor(Math.random()*NUMS.length)];
     fetch(`${API_ROOT}/games/${this.state.game_id}`, {
       method: 'PATCH',
       headers: HEADERS,
@@ -73,7 +71,7 @@ class Game extends Component {
   render(){
     let char;
     if (this.state.drawn_numbers) {
-      char = "BINGO"[Math.floor(this.state.drawn_numbers[this.state.drawn_numbers.length-1] / 15)]
+      char = "BINGO"[Math.floor((this.state.drawn_numbers[this.state.drawn_numbers.length-1]-1) / 15)]
     }
     const cardId = this.props.match.params.card_id
     
@@ -85,7 +83,7 @@ class Game extends Component {
             <div id="new-card">
               <form onSubmit={this.createCard}>
                 <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
-                <button type="submit">New Card</button>
+                <button type="submit" disabled={this.state.drawn_numbers.length === 75}>New Card</button>
               </form>
             </div>
           }
