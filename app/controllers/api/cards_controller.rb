@@ -20,6 +20,10 @@ class Api::CardsController < ApplicationController
 
   def update
     card = Card.find(card_params[:id])
+    if !card.ready
+      card.ready = true
+      clean_board
+    end
     game = card.game
     if card.update(card_params)
       GamesChannel.broadcast_to(game, {
@@ -38,11 +42,18 @@ class Api::CardsController < ApplicationController
       :id,
       :user,
       :ready,
-      :game_id,
-      :board
+      :game_id
     )
     hash[:checked] = params["card"].require(:checked) if params["card"]&.has_key?(:checked)
     hash[:board] = params["card"].require(:board) if params["card"]&.has_key?(:board)
     hash
+  end
+
+  def clean_board
+    card_params[:board].each do |col|
+      col.each do |cell|
+        cell = cell.to_i
+      end
+    end
   end
 end

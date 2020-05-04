@@ -47,7 +47,7 @@ class Game extends Component {
     return this.state.cards.map((card, i) => {
       return <Link key={i}
         to={{pathname: `/games/${this.state.game_id}/cards/${card.id}`}}>
-          <SmallCard checked={card.checked} user={card.user} key={i} />
+          <SmallCard checked={card.checked} user={card.user} ready={card.ready} key={i} />
         </Link>
     })
   }
@@ -78,7 +78,7 @@ class Game extends Component {
       char = "BINGO"[Math.floor((this.state.drawn_numbers[this.state.drawn_numbers.length-1]-1) / 15)]
     }
     const cardId = this.props.match.params.card_id
-    
+
     return (
       <div className="game">
         <div>
@@ -86,7 +86,7 @@ class Game extends Component {
           {cardId ? null :
             <div id="new-card">
               <form onSubmit={this.createCard}>
-                <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} placeholder="Player Name" />
+                <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} placeholder="Player Name" className="new-user" />
                 <button type="submit" disabled={this.state.drawn_numbers.length === 75}>New Card</button>
               </form>
             </div>

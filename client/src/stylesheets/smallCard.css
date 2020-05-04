@@ -11,8 +11,12 @@
   width: 10px;
 }
 
-.small-grid .checked {
+.small-grid.not-ready .checked {
   background-color: red;
+}
+
+.small-grid.ready .checked {
+  background-color: green;
 }
 
 .small-cell {

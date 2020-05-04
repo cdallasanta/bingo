@@ -3,7 +3,7 @@ import '../stylesheets/smallCard.css'
 
 export class SmallCard extends Component {
   showGrid = () => {
-    return <div className="small-grid">
+    return <div className={`small-grid ${this.props.ready ? "ready" : "not-ready"}`}>
       {this.props.checked.map((col, i) => {
         return <div key={i} className="small-column"> {
           col.map((cell, i) => {

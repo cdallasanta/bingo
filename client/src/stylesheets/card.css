@@ -74,11 +74,32 @@
   margin-bottom: 10px;
 }
 
-input {
+.new-user {
   width: 200px;
   margin-right: 10px;
   font-size: 100%;
   background: #ddd
+}
+
+div.alert {
+  width: 70%;
+  background-color: palegoldenrod;
+  border: 3px solid tan;
+  margin-top: 15px;
+  padding: 4px;
+}
+
+button {
+  margin: 15px 5px;
+  padding: 3px;
+}
+
+.card-cell-input {
+  width: 90%;
+  height: 80%;
+  text-align: center;
+  font-size: 100%;
+  background: #ddd;
 }
 
 /* Chrome, Safari, Edge, Opera */
