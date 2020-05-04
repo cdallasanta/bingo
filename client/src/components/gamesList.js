@@ -40,8 +40,8 @@ class GamesList extends React.Component {
   render(){
     return (
     <div className="gamesList">
-      <button onClick={this.createGame}>New Game</button>
-      <h2>Games</h2>
+      <button onClick={this.createGame}>Create Game</button>
+      <h2>Past Games:</h2>
       <ul>
         {this.showGames()}
       </ul>
