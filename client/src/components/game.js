@@ -32,11 +32,15 @@ class Game extends Component {
   }
 
   createCard = () => {
-    fetch(`${API_ROOT}/cards`, {
-      method: 'POST',
-      headers: HEADERS,
-      body: JSON.stringify({card: {game_id: this.state.game_id, user: this.state.newUser}})
-    })
+    if (this.state.newUser !== ""){
+      fetch(`${API_ROOT}/cards`, {
+        method: 'POST',
+        headers: HEADERS,
+        body: JSON.stringify({card: {game_id: this.state.game_id, user: this.state.newUser}})
+      })
+    } else {
+      alert("Please enter a name first");
+    }
   }
 
   showCards = () => {
@@ -82,7 +86,7 @@ class Game extends Component {
           {cardId ? null :
             <div id="new-card">
               <form onSubmit={this.createCard}>
-                <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} />
+                <input value={this.state.newUser} onChange={e => this.setState({newUser: e.target.value})} placeholder="Player Name" />
                 <button type="submit" disabled={this.state.drawn_numbers.length === 75}>New Card</button>
               </form>
             </div>
