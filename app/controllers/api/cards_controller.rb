@@ -38,7 +38,8 @@ class Api::CardsController < ApplicationController
       :id,
       :user,
       :ready,
-      :game_id
+      :game_id,
+      :board
     )
     hash[:checked] = params["card"].require(:checked) if params["card"]&.has_key?(:checked)
     hash[:board] = params["card"].require(:board) if params["card"]&.has_key?(:board)

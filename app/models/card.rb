@@ -15,5 +15,6 @@ class Card < ApplicationRecord
     end
     self.board[2][2] = "Free Space"
     self.checked[2][2] = true
+    self.ready = false
   end
 end
