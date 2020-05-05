@@ -67,6 +67,26 @@ class Card extends React.Component {
     });
   }
 
+  randomizeBoard = () => {
+    let newBoard = [];
+    [..."BINGO"].map((char, i) => {
+      let column = [];
+      for(let j = 0; j < 5; j++) {
+        let num = Math.floor((Math.random() * 15 + (15 * i) + 1));
+        while (column.includes(num)) {
+          num = Math.floor((Math.random() * 15 + (15 * i) + 1))
+        }
+        column.push(num)
+      }
+      newBoard.push(column);
+    });
+    newBoard[2][2] = null;
+
+    this.setState({
+      board: newBoard
+    });
+  }
+
   clickCell = targetCell => {
     if (this.props.card.ready){
       const row = targetCell.dataset.row;
@@ -100,6 +120,9 @@ class Card extends React.Component {
         {this.props.card.ready ? null : this.alertBox()}
         {this.props.card.ready ? null :
           <button onClick={this.saveCard} >Save Card</button>
+        }
+        {this.props.card.ready ? null :
+          <button onClick={this.randomizeBoard} >Randomize Card</button>
         }
         {this.showGrid()}
       </div>
